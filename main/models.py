@@ -6,7 +6,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=30, null=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
     email = models.EmailField(unique=True)
-    avatar = models.ImageField(null=True)#default
+    avatar = models.ImageField(null=True, blank=True)#default
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
