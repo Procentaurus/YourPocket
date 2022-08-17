@@ -1,0 +1,63 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark py-0 fixed-top">
+    <div class="container-fluid justify-content-center">
+        <div class="d-flex mb-0">
+            <a class="navbar-brand me-2" href="#">
+                <img class='rounded-pill' src="{% static '/images/logo.png' %}" alt="LOGO" id="logo">
+            </a>
+            <span class="navbar-text text-nowrap me-4" id="logoText">Your Pocket</span>
+            <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start d-lg-none bg-dark" id="sideMenu">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset position-absolute end-0 pe-5 me-1 bg-white" data-bs-dismiss="offcanvas"></button>
+                </div>
+                <div class="offcanvas-body p-2">
+                    <ul class="nav flex-column rounded">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" href="#"><strong>Napoleon's Biography</strong></a>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" href="#"><strong>Napoleon's Marschals</strong></a>
+                        </li>
+                        <li class="nav-item dropdown mx-2">
+                            <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" href="#"><strong>Biggest battles of Napoleon Era</strong></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark bg-dark">
+                                <li><a class="dropdown-item" href="#">Battle of the Nations</a></li>
+                                <li><a class="dropdown-item" href="#">Battle of 3 Emperors</a></li>
+                                <li><a class="dropdown-item" href="#">Battle of Borodino</a></li>
+                                <li><a class="dropdown-item" href="#">Battle of Wagram</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item mx-2">
+                            <a class="nav-link text-white" href="#"><strong>Heiritage of Napoleonic Era</strong></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-white" href="#"><strong>Napoleon's Biography</strong></a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-white" href="#"><strong>Napoleon's Marschals</strong></a>
+                    </li>
+                    <li class="nav-item dropdown mx-2">
+                        <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" href="#"><strong>Biggest battles of Napoleon Era</strong></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark bg-dark">
+                            <li><a class="dropdown-item" href="#">Battle of the Nations</a></li>
+                            <li><a class="dropdown-item" href="#">Battle of 3 Emperors</a></li>
+                            <li><a class="dropdown-item" href="#">Battle of Borodino</a></li>
+                            <li><a class="dropdown-item" href="#">Battle of Wagram</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><strong>Heiritage of Napoleonic Era</strong></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

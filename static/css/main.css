@@ -1,0 +1,13 @@
+@font-face{
+    src: url(logoFont.ttf);
+    font-family: logoFont;
+}
+
+#logoText{
+    font-family: logoFont;
+    font-size: 35px;
+}
+#logo{
+    width: 65px;
+    padding-top: 5px;
+}
