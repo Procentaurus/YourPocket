@@ -5,4 +5,4 @@ from .models import *
 admin.site.register(Income)
 admin.site.register(Expense)
 admin.site.register(Message)
-admin.site.register(User)
+admin.site.register(Customer)

@@ -1,15 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 
-class User(AbstractUser):
-    first_name = models.CharField(max_length=30, null=True)
-    last_name = models.CharField(max_length=30, null=True)
-    phone = models.CharField(max_length=15, null=True, blank=True)
-    email = models.EmailField(unique=True)
-    avatar = models.ImageField(null=True, blank=True)#default
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+class Customer(models.Model):
+    user = models.OneToOneField(User, null=True,blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30, null=True)
+    phone = models.CharField(max_length=30, null=True, blank=True)
+    email = models.CharField(max_length=30, null=True)
+    avatar = models.ImageField(default='model.png', null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.name)
 
 class Expense(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
@@ -32,7 +35,7 @@ class Expense(models.Model):
     category = models.CharField(max_length=30, choices=CATEGORIES)
 
     def __str__(self):
-        return self.name+' - '+self.value
+        return self.name+' - '+str(self.value)
 
 class Income(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
@@ -43,7 +46,7 @@ class Income(models.Model):
 
     CATEGORIES = (
         ('Salary', 'Salary'),
-        ('return on investment', 'return on investment'),
+        ('Return on investment', 'Return on investment'),
         ('Selling goods', 'Selling goods'),
         ('Credits and loans', 'Credit and loans'),
         ('Rent / pension', 'Rent / pension'),
@@ -54,7 +57,7 @@ class Income(models.Model):
     category = models.CharField(max_length=30, choices=CATEGORIES)
 
     def __str__(self):
-        return self.name+' - '+self.value
+        return self.name+' - '+str(self.value)
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
