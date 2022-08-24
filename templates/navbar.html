@@ -81,7 +81,7 @@
             <div class="d-flex justify-content-end align-items-center">
                 {% if request.user.is_authenticated %}
                 <img class='avatar' src="{{request.user.customer.avatar.url}}">
-                <span class="text-white text-nowrap me-4 fw-bold">{{request.user}}</span>
+                <span class="text-white text-nowrap me-4 fw-bold">@{{request.user}}</span>
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle p-2 mx-1 rounded" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class='text-dark fw-bold'>Options</span>
@@ -100,4 +100,4 @@
         </div>
     </div>
 </nav>
-<div style="margin-bottom: 70px"></div>
+<div style="margin-bottom: 70px"></div><br>
