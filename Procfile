@@ -1,1 +1,1 @@
-web: guinicorn YourPocket.wsgi
+web: gunicorn YourPocket.wsgi
