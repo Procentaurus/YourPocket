@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <div class="d-flex justify-content-center">
+        <div class="card mt-5 rounded border-4" style="width:1200px;">
+            <div class="card-body">
+                <div class="container h-120">
+                    <div class="d-flex justify-content-center h-120">
+                        <div class="card card-body mb-1 d-flex justify-content-center">
+                            <div class="text-center">
+                                <h3 class="fw-bold">You can update chosen {{type}} below</h3>
+                                
+                                <form ation="{% url 'edit' type object.id %}" method="POST">
+                                    {% csrf_token %}
+
+                                    <div class="row">
+                                        {% for field in form %}
+                                        <div class="col">
+                                            <span class="fw-bold">{{field.label}}:</span>&nbsp;&nbsp;{{field}}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="d-grid">
+                                        <input class="btn btn-dark mt-3" type="submit" name="Confirm" value="Update">
+                                    </div>
+                                </form>
+                            </div>
+                            {% if type == 'expense' %}
+                            <a class="btn btn-warning mt-3" href="{% url 'profile' request.user.id %}?active=expence"> &#8592; Back to Profile</a>
+                            {% else %}
+                            <a class="btn btn-warning mt-3" href="{% url 'profile' request.user.id %}?active=income"> &#8592; Back to Profile</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</main>
+
+{% endblock content %}

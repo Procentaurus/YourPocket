@@ -10,3 +10,39 @@ def deleteFile(path):
         return True
     else:
         return False
+
+def sumOfData(data):
+    sum = 0
+    for x in data:
+        sum += float(x['value'])
+    
+    sum = round(sum, 2)
+    sum = "{:,}".format(sum)
+    try:
+        index = str(sum).index('.')
+    except:
+        index = -1
+
+    if index == -1:
+        return sum + ".00"
+    else:
+        if(index == len(sum)-2):
+            return sum + "0"
+        elif(index == len(sum)-3):
+            return sum
+
+def createPercentage(data):
+    dict = {}
+
+    for element in data:
+        if element['category'] in dict:
+            dict[element['category']] += float(element['value'])
+        else:
+            dict[element['category']] = float(element['value'])
+
+    for element in dict:
+        dict[element] = round(dict[element],2)
+        
+    return dict
+        
+    

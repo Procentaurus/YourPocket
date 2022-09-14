@@ -51,3 +51,41 @@ class CreateCustomerForm(ModelForm):
                     'class':'form-control',
                 }),
         }
+
+class CreateExpenseForm(ModelForm):
+    class Meta:
+        model = Expense
+        fields = '__all__'
+        exclude = ['customer']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Name of the expence..',
+                }),
+            'category': forms.Select(attrs={
+                        'class':'form-control',
+                }),
+            'value': forms.NumberInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Value of the expence..',
+                }),
+        }
+
+class CreateIncomeForm(ModelForm):
+    class Meta:
+        model = Income
+        fields = '__all__'
+        exclude = ['customer']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Name of the income..',
+                }),
+            'category': forms.Select(attrs={
+                        'class':'form-control',
+                }),
+            'value': forms.NumberInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Value of the income..',
+                }),
+        }
