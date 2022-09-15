@@ -146,4 +146,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_PASSWORD')
 DEFAULT_FROM_EMAIL = 'YourPocket Service'
 
 
-django_heroku.setings(locals())
+django_heroku.settings(locals())
