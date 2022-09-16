@@ -15,7 +15,7 @@
     <div class="container-fluid justify-content-center">
         <div class="d-flex mb-0">
             <a class="navbar-brand me-2" href="#">
-                <img class='rounded-pill' src="{% static '/images/logo.png' %}" alt="LOGO" id="logo">
+                <img class='rounded-pill' src="{% static 'images/logo.png' %}" alt="LOGO" id="logo">
             </a>
             <span class="navbar-text text-nowrap me-4" id="logoText">Your Pocket</span>
             <button class="btn btn-dark d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideMenu">
@@ -92,7 +92,7 @@
                     </ul>
                 </div></span>
                 {% else %}
-                <img class='avatar' src="{% static '/images/model.png' %}">
+                <img class='avatar' src="{% static 'images/model.png' %}">
                 <span class="mt-1"><a class="text-white text-decoration-none bg-light p-2 mx-1 rounded" href="{% url 'login' %}"><span class='text-dark fw-bold'>Login</span></a></span>
                 {% endif %}
 

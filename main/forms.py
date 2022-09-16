@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -26,7 +27,12 @@ class CreateUserForm(UserCreationForm):
         }
 
 class CreateCustomerForm(ModelForm):
+    # class MyImageField(forms.ImageField):
+    #     @property
+    #     def url(self):
+    #         return "static/images/user_images/{name}".format(name=self.name)
     avatar = forms.ImageField(required=False)
+    
     class Meta:
         model = Customer
         fields =  '__all__'

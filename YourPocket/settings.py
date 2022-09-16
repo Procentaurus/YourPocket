@@ -24,12 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-0sj^!li)_29r=v%$h+b*nwonjlorq(27!ui!%+v^xao49wws1!'
 SECRET_KEY = os.environ.get('DJANGO_P1_SECRET_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DJANGO_P1_DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['appmypocket.herokuapp.com','127.0.0.1']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +44,8 @@ INSTALLED_APPS = [
     'main.apps.MainConfig'
 ]
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'YourPocket.urls'
@@ -125,12 +127,11 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/images/user_images/')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
-
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/images/user_images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -145,5 +146,23 @@ EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_PASSWORD')
 DEFAULT_FROM_EMAIL = 'YourPocket Service'
 
-
 django_heroku.settings(locals())
+
+LOGGING = {
+
+     'version': 1,
+
+     'disable_existing_loggers': False,
+
+     'handlers': {
+
+         'console': {
+
+             'class': 'logging.StreamHandler',
+
+         },
+
+     },
+
+}
+
