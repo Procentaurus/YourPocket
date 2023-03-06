@@ -25,3 +25,30 @@
 .maincontainer{
     justify-content: center;
 }
+#zenek{
+    background-image: url("/static/images/assistant.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+#mainPicture{
+    background-image: url("/static/images/main.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.avatar{
+    max-width: 45x;
+    max-height:45px;
+    margin: 0 auto;
+    border-radius: 30%;
+    margin-left: 60px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.profile-pic{
+    max-width: 320px;
+    max-height:320px;
+    margin: 0 auto;
+    border-radius: 40%;
+}

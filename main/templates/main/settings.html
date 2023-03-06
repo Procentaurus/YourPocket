@@ -2,20 +2,11 @@
 {% load static %}
 {% block content %}
 
-<style>
-	.profile-pic{
-		max-width: 320px;
-		max-height:320px;
-		margin: 0 auto;
-		border-radius: 40%;
-	}
-</style>
-
 <main>
-	<div class="row mx-3">
+	<div class="row mt-3">
 		<div class="col-md-4">
-			<div class="card card-body">
-				<a class="btn btn-warning" href="{% url 'home' %}"> &#8592; Back to Profile</a>
+			<div class="card card-body ms-3">
+				<a class="btn btn-secondary fw-bold" href="{% url 'home' %}"> &#8592; Back to Profile</a>
 				<hr>
 				<h3 style="text-align: center">Account Settings</h3>
 				<hr>
@@ -24,7 +15,7 @@
 			</div>
 		</div>
 		<div class="col-md-8">
-			<div class="card card-body">
+			<div class="card card-body me-3">
 				
 				<form method="POST" action="" enctype="multipart/form-data">
 					{% csrf_token %}
@@ -37,7 +28,7 @@
 					</div>
 					{% endfor %}
 					<div class="d-grid">
-					<input class="btn btn-warning" type="submit" name="Update Information" value="Update data">
+					<input class="btn btn-secondary fw-bold" type="submit" name="Update Information" value="Update data">
 					</div>
 				</form>
 				{% for message in messages %}
@@ -61,14 +52,18 @@
 			<div class="d-flex flex-row bd-highlight justify-content-center">
 				<div class="col-sm-3">
 					<div class="p-1 bd-highlight d-grid">
-						<a class="btn btn-warning mx-2 p-2" href="{% url 'password_reset' %}">&#8677;&nbsp;&nbsp;Change your password&nbsp;&nbsp;&#8676;</a>
+						<a class="btn btn-info mx-2 p-2 fw-bold" href="{% url 'password_reset' %}">Change your password</a>
 					</div>
 				</div>
 				<div class="col-sm-3">
-					<div class="p-1 bd-highlight d-grid">Flex item 2</div>
+					<div class="p-1 bd-highlight d-grid">
+						<a class="btn btn-success mx-2 p-2 fw-bold" href="#">Buy Premium Account</a>
+					</div>
 				</div>
 				<div class="col-sm-3">
-					<div class="p-1 bd-highlight d-grid">Flex item 3</div>
+					<div class="p-1 bd-highlight d-grid">
+						<a class="btn btn-danger mx-2 p-2 fw-bold" href="#">Delete your account</a>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -12,6 +12,8 @@ urlpatterns = [
     path('logout/', views.logoutPage, name='logout'),
     path('register/', views.registerPage, name='register'),
 
+    path('contact/', views.contact, name='contact'),
+
     path('add_income/', views.addIncome, name='add_income'),
     path('add_expense/', views.addExpense, name='add_expense'),
     path('confirm/<int:pk>/<str:type>/', views.confirm, name='confirm'),

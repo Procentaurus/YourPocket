@@ -1,15 +1,4 @@
 {% load static %}
-<style>
-.avatar{
-    max-width: 45x;
-    max-height:45px;
-    margin: 0 auto;
-    border-radius: 30%;
-    margin-left: 60px;
-    margin-top: 5px;
-    margin-right: 5px;
-}
-</style>
 
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-0 fixed-top">
     <div class="container-fluid justify-content-center">
@@ -31,7 +20,7 @@
                             <a class="nav-link text-white" href="{% url 'home' %}"><strong>Home</strong></a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link text-white" href="#"><strong>Contact</strong></a>
+                            <a class="nav-link text-white" href="{% url 'contact' %}"><strong>Contact</strong></a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="btn bg-dark text-white fw-bold" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">What to do with your savings???</a>
@@ -60,7 +49,7 @@
                         <a class="nav-link text-white" href="{% url 'home' %}"><strong>Home</strong></a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-white" href="#"><strong>Contact</strong></a>
+                        <a class="nav-link text-white" href="{% url 'contact' %}"><strong>Contact</strong></a>
                     </li>
                     <li class="nav-item dropdown mx-2">
                         <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" href="#"><strong>What to do with your savings???</strong></a>
@@ -100,4 +89,4 @@
         </div>
     </div>
 </nav>
-<div style="margin-bottom: 70px"></div><br>
+<div style="margin-bottom: 44px;"></div><br>

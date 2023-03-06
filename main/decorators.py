@@ -5,7 +5,17 @@ def unauthenticatedUser(view_func):
         if request.user.is_authenticated:
             return redirect('home')
         else:
-            return view_func(request, *args, **kwargs)
+           return view_func(request, *args, **kwargs)
+
+    return wrapper_func
+
+def differentUser(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        if request.method == 'GET':
+            if request.user.id != kwargs['pk']:
+                return redirect('home')
+            else:
+                return view_func(request, *args, **kwargs)
 
     return wrapper_func
 

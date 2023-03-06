@@ -32,14 +32,14 @@
                                 <form ation="{% url 'delete' type object.id %}" method="POST">
                                     {% csrf_token %}
                                     <div class="d-grid">
-                                        <input class="btn btn-dark mt-3" type="submit" name="Confirm" value="Yes, I want to delete it">
+                                        <input class="btn btn-danger mt-3" type="submit" name="Confirm" value="Yes, I want to delete it">
                                     </div>
                                 </form>
                             </div>
                             {% if type == 'expense' %}
-                            <a class="btn btn-warning mt-3" href="{% url 'profile' request.user.id %}?active=expence"> &#8592; Back to Profile</a>
+                            <a class="btn btn-info mt-3 fw-bold" href="{% url 'profile' request.user.id %}?active=expence"> &#8592; Back to Profile</a>
                             {% else %}
-                            <a class="btn btn-warning mt-3" href="{% url 'profile' request.user.id %}?active=income"> &#8592; Back to Profile</a>
+                            <a class="btn btn-info mt-3 fw-bold" href="{% url 'profile' request.user.id %}?active=income"> &#8592; Back to Profile</a>
                             {% endif %}
                         </div>
                     </div>

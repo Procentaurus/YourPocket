@@ -1,8 +1,12 @@
+from email import message
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 
+from main.decorators import *
 from .forms import *
 from .models import *
 from .functions import *
@@ -13,6 +17,8 @@ def home(request):
     context = {}
     return render(request, 'main/home.html', context)
 
+@login_required(login_url='login')
+@differentUser
 def profile(request, pk):
     active = None
     if request.GET.get('active') is None:
@@ -83,6 +89,8 @@ def profile(request, pk):
     }
     return render(request, 'main/profile.html', context)
 
+@login_required(login_url='login')
+@differentUser
 def settings(request,pk):
     customer = (User.objects.get(id=pk)).customer
     form = CreateCustomerForm(instance=customer)
@@ -107,7 +115,7 @@ def settings(request,pk):
     context = {'form': form}
     return render(request, 'main/settings.html', context)
 
-
+@unauthenticatedUser
 def loginPage(request):
     page = 'login'
     if request.method == 'POST':
@@ -124,6 +132,7 @@ def loginPage(request):
     context = {'page': page}
     return render(request, 'main/login_register.html', context)
 
+@unauthenticatedUser
 def registerPage(request):
     page='register'
     form = CreateUserForm()
@@ -178,6 +187,7 @@ def addExpense(request):
     else:
         return redirect('home')
 
+@login_required(login_url='login')
 def confirm(request, pk, type):
     if type == 'expense':
         object = Expense.objects.get(id=pk)
@@ -190,6 +200,7 @@ def confirm(request, pk, type):
     }
     return render(request, 'main/confirm.html', context)
 
+@login_required(login_url='login')
 def deleteObject(request, type, pk):
     responce =  redirect('profile', request.user.id)
     responce['Location'] += f'?active={type}'
@@ -202,13 +213,13 @@ def deleteObject(request, type, pk):
         object.delete()
         return responce
 
-    action = 'delete'
     context = {
         'object': object,
         'type': type,
     }
     return render(request, 'main/delete.html', context)
 
+@login_required(login_url='login')
 def editObject(request, type, pk):
     form, object = None, None
     if type == 'expense':
@@ -229,6 +240,41 @@ def editObject(request, type, pk):
     context = {
         'form': form,
         'type': type,
-        'object': object
-        }
+        'object': object,
+    }
     return render(request, 'main/edit.html', context)
+
+def error404_view(request, exception):
+    context = {
+        'error': '404',
+    }
+    return render(request, 'main/error.html', context, status=404)
+
+def error500_view(request):
+    context = {
+        'error': '500',
+    }
+    return render(request, 'main/error.html', context, status=500)
+
+def contact(request):
+    if request.method =='POST':
+        messageBody = request.POST.get('message_body')
+        chosenCase = request.POST.get('chosenCase')
+        email = request.POST.get('email')
+        emailMessage = "Email from: "+ email +"\n\n"+ messageBody
+        try:
+            send_mail(
+                chosenCase,
+                emailMessage,
+                None,
+                ['michalski.44@wp.pl'],
+                fail_silently=False,
+            )
+            messages.info(request, 'Your message was sent successfully.')
+        except:
+            messages.error(request, 'An error occured during sending mail, try later..')
+            return render(request, 'main/contact.html')
+
+        return redirect('home')
+        
+    return render(request, 'main/contact.html')
