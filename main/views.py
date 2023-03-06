@@ -5,6 +5,9 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.core.serializers.json import DjangoJSONEncoder
+import datetime
 
 from main.decorators import *
 from .forms import *
@@ -16,6 +19,36 @@ def home(request):
 
     context = {}
     return render(request, 'main/home.html', context)
+
+def profileDataVisualisation(request):
+
+    period = None
+    try:
+        period = request.GET.get('period')
+    except:
+        pass
+
+    all_expenses = request.user.customer.expense_set.all()
+    all_incomes = request.user.customer.income_set.all()
+
+    if period is not None:
+        start, end = None, None
+        if period == "all":
+            end = datetime.date.today()
+            print(end)
+        elif period == "last1":
+            pass
+        elif period == "last3":
+            pass
+        else:
+            pass
+        data = {
+            'total_incomes' : sumOfData(all_incomes.values('value')),
+            'total_expenses' : sumOfData(all_expenses.values('value')),
+            'expenses_by_categories' : createPercentage(all_expenses.values('value', 'category')),
+            'incomes_by_categories' : createPercentage(all_incomes.values('value', 'category')),
+        }
+        return JsonResponse(data, DjangoJSONEncoder, True)
 
 @login_required(login_url='login')
 @differentUser
@@ -32,14 +65,8 @@ def profile(request, pk):
     expense_form = CreateExpenseForm()
     income_form = CreateIncomeForm()
 
-    all_expenses = user.customer.expense_set.all()
-    all_incomes = user.customer.income_set.all()
-
-    total_expenses = sumOfData(all_expenses.values('value'))
-    total_incomes = sumOfData(all_incomes.values('value'))
-
-    expenses_by_categories = createPercentage(all_expenses.values('value', 'category'))
-    incomes_by_categories = createPercentage(all_incomes.values('value', 'category'))
+    all_expenses = customer.expense_set.all()
+    all_incomes = customer.income_set.all()
 
     #   expense filter
     exp_filter = ExpenseFilter(request.GET, queryset=all_expenses)
@@ -73,14 +100,8 @@ def profile(request, pk):
         'num_inc_pages': incomes_number_of_pages,
         'num_exp_pages': expenses_number_of_pages,
 
-        'total_expenses':total_expenses,
-        'total_incomes':total_incomes,
-
         'expense_form':expense_form,
         'income_form':income_form,
-
-        'incomes_by_categories':incomes_by_categories,
-        'expenses_by_categories':expenses_by_categories,
 
         'exp_filter': exp_filter,
         'inc_filter': inc_filter,

@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% load custom_tags %}
-
+{% load static %}
 
 {% block content %}
 
@@ -349,5 +349,11 @@
         </div>
     </div>
 </main>
+
+<script data-username="{{ customer.id }}">
+  const data = document.currentScript.dataset;
+  const customerID = data.username;
+</script>
+<script type="text/javascript" src="{% static 'js/analisys.js' %}"></script>
 
 {% endblock content %}
