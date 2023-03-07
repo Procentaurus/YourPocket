@@ -32,21 +32,24 @@ def profileDataVisualisation(request):
     all_incomes = request.user.customer.income_set.all()
 
     if period is not None:
-        start, end = None, None
+        start, end = None, datetime.date.today()
         if period == "all":
-            end = datetime.date.today()
-            print(end)
+            start = datetime.date.min
         elif period == "last1":
-            pass
+            start = end
+            start -= datetime.timedelta(months=1)
         elif period == "last3":
-            pass
+            start = end
+            start -= datetime.timedelta(months=3)
         else:
-            pass
+            start = end
+            start -= datetime.timedelta(years=1)
+
         data = {
-            'total_incomes' : sumOfData(all_incomes.values('value')),
-            'total_expenses' : sumOfData(all_expenses.values('value')),
-            'expenses_by_categories' : createPercentage(all_expenses.values('value', 'category')),
-            'incomes_by_categories' : createPercentage(all_incomes.values('value', 'category')),
+            'total_incomes' : sumOfData(all_incomes.values('value', 'date_created'), start, end),
+            'total_expenses' : sumOfData(all_expenses.values('value', 'date_created'), start, end),
+            'expenses_by_categories' : createPercentage(all_expenses.values('value', 'category', 'date_created'), start, end),
+            'incomes_by_categories' : createPercentage(all_incomes.values('value', 'category', 'date_created'), start, end),
         }
         return JsonResponse(data, DjangoJSONEncoder, True)
 

@@ -311,31 +311,30 @@
                     </div>
                     <div class="col-sm-3"></div>
                   </div>
-                  <div class="row d-flex justify-content-center">
+
+                  <div class="row">
                     <div class="col-sm-5">
-                      <div class="card card-body my-2">
-                        <span class="fw-bold fs-2 text-center">Structure of Expenses</span>
+                      <div class="card card-body my-2 ms-2">
                         <div id="piechart_expenses"></div>
                       </div>
-                      <div class="card card-body my-2">
-                        <span class="fw-bold text-center fs-2">Structure of Incomes</span>
+                      <div class="card card-body my-2 ms-2">
                         <div id="piechart_incomes"></div>
                       </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                       <div class="row">
                         <div class="col">
                           <div class="card card-body my-2 bg-danger text-white rounded-3">
-                            <span class="fw-bold text-center">Sum of Expences</span>
+                            <h3 class="fw-bold text-center">Sum of Expences</h3>
                             <hr style="color:white; height:3px" class="mb-3">
-                            <h1 class="text-center">{{total_expenses}} $</h1>
+                            <h2 class="text-center" id="expenses_sum"></h2>
                           </div>
                         </div>
                         <div class="col">
-                          <div class="card card-body my-2 bg-success text-white rounded-3">
-                            <span class="fw-bold text-center">Sum of Incomes</span>
+                          <div class="card card-body my-2 me-2 bg-success text-white rounded-3">
+                            <h3 class="fw-bold text-center">Sum of Incomes</h3>
                             <hr style="color:white; height:3px" class="mb-3">
-                            <h1 class="text-center">{{total_incomes}} $</h1>
+                            <h2 class="text-center" id="incomes_sum"></h2>
                           </div>
                         </div>
                       </div>
@@ -354,6 +353,7 @@
   const data = document.currentScript.dataset;
   const customerID = data.username;
 </script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript" src="{% static 'js/analisys.js' %}"></script>
 
 {% endblock content %}

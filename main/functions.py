@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import datetime
 
 def deleteFile(path):
     if path != '/images/model.png':
@@ -11,34 +12,26 @@ def deleteFile(path):
     else:
         return False
 
-def sumOfData(data):
+def sumOfData(data, start, end):
     sum = 0
-    for x in data:
-        sum += float(x['value'])
+    for element in data:
+        if (element['date_created']).date() >= start and (element['date_created']).date() <= end:
+            sum += float(element['value'])
     
     sum = round(sum, 2)
-    sum = "{:,}".format(sum)
-    try:
-        index = str(sum).index('.')
-    except:
-        index = -1
+    return sum
 
-    if index == -1:
-        return sum + ".00"
-    else:
-        if(index == len(sum)-2):
-            return sum + "0"
-        elif(index == len(sum)-3):
-            return sum
-
-def createPercentage(data):
+def createPercentage(data, start, end):
     dict = {}
 
     for element in data:
-        if element['category'] in dict:
-            dict[element['category']] += float(element['value'])
-        else:
-            dict[element['category']] = float(element['value'])
+        if (element['date_created']).date() >= start and (element['date_created']).date() <= end:
+            if element['category'] in dict:
+                dict[element['category']] += float(element['value'])
+            elif element['category'] not in dict:
+                dict[element['category']] = float(element['value'])
+            else :
+                pass
 
     for element in dict:
         dict[element] = round(dict[element],2)
