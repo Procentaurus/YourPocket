@@ -8,6 +8,9 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.core.serializers.json import DjangoJSONEncoder
 import datetime
+from dateutil.relativedelta import relativedelta
+from calendar import monthrange
+
 
 from main.decorators import *
 from .forms import *
@@ -32,24 +35,38 @@ def profileDataVisualisation(request):
     all_incomes = request.user.customer.income_set.all()
 
     if period is not None:
-        start, end = None, datetime.date.today()
+        start, end, option = None, datetime.date.today(), None
         if period == "all":
             start = datetime.date.min
-        elif period == "last1":
-            start = end
-            start -= datetime.timedelta(months=1)
+            option = "all"
+        elif period == "last":
+            end = end - relativedelta(months=1)
+            lastDay = monthrange(end.year, end.month)
+            end = datetime.date(end.year, end.month, lastDay[1])
+            lastDay = monthrange(end.year, end.month)
+            start = datetime.date(end.year, end.month, 1)
+            option = "last"
         elif period == "last3":
-            start = end
-            start -= datetime.timedelta(months=3)
+            start = end - relativedelta(months=2)
+            start = datetime.date(start.year, start.month, 1)
+            option = "last3"
+        elif period == "lasty":
+            start = datetime.date(end.year - 1, end.month, end.day)
+            option = "lasty"
+        elif period == "this":
+            start = datetime.date(end.year, end.month, 1)
+            option = "this"
         else:
-            start = end
-            start -= datetime.timedelta(years=1)
+            start = datetime.date.min
+            option = ""
 
         data = {
             'total_incomes' : sumOfData(all_incomes.values('value', 'date_created'), start, end),
             'total_expenses' : sumOfData(all_expenses.values('value', 'date_created'), start, end),
             'expenses_by_categories' : createPercentage(all_expenses.values('value', 'category', 'date_created'), start, end),
             'incomes_by_categories' : createPercentage(all_incomes.values('value', 'category', 'date_created'), start, end),
+            'incomes_by_period': createPeriodData(all_incomes.values('value', 'date_created'), start, end, option),
+            'expenses_by_period': createPeriodData(all_expenses.values('value', 'date_created'), start, end, option),
         }
         return JsonResponse(data, DjangoJSONEncoder, True)
 

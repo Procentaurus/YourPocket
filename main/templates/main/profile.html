@@ -300,16 +300,33 @@
                 <!-- tab nr3 -> Financial Analysis -->
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                   <div class="row d-flex justify-content-center">
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2"></div>
                     <div class="col">
-                      <div class="card card-body ">
-                        Choose the period
-                        <form>
-  
-                        </form>
+                      <div class="card card-body shadow bg-dark">
+                        <h3 class="text-center fw-bold text-light">Choose the period</h3>
+                        <div class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
+                        
+                          <label class="btn btn-outline-light" >Quick choose :</label>
+                          
+                          <input type="radio" class="btn-check" name="btnradio" id="btnradio" autocomplete="off" checked>
+                          <label class="btn btn-outline-light" for="btnradio" id="radio">This month</label>
+
+                          <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                          <label class="btn btn-outline-light" for="btnradio2" id="radio2">Last month</label>
+
+                          <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                          <label class="btn btn-outline-light" for="btnradio3" id="radio3">Last 3 months</label>
+
+                          <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+                          <label class="btn btn-outline-light" for="btnradio4" id="radio4">Last year</label>
+
+                          <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off">
+                          <label class="btn btn-outline-light" for="btnradio5" id="radio5">All</label>
+
+                        </div>
                       </div>
                     </div>
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2"></div>
                   </div>
 
                   <div class="row">
@@ -339,7 +356,7 @@
                         </div>
                       </div>
                       <div class="card card-body">
-                        <span class="fw-bold text-center">Incomes to Expenses</span>
+                        <div id="barChart"></div>
                       </div>
                     </div>
                   </div>
@@ -357,3 +374,16 @@
 <script type="text/javascript" src="{% static 'js/analisys.js' %}"></script>
 
 {% endblock content %}
+
+<div class="btn-group" role="group">
+  <button id="btnGroupDrop1" type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Choose year
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+    <li><button class="dropdown-item" id="currentYear"></button></li>
+    <li><button class="dropdown-item" id="currentYear-1"></button></li>
+    <li><button class="dropdown-item" id="currentYear-2"></button></li>
+    <li><button class="dropdown-item" id="currentYear-3"></button></li>
+    <li><button class="dropdown-item" id="currentYear-4"></button></li>
+  </ul>
+</div>
