@@ -48,9 +48,10 @@ def createPeriodData(data, start, end, option):
             if (element['date_created']).date() >= start and (element['date_created']).date() <= end:
                 dict["{}-{}".format(start.year,start.month)] += float(element['value'])
 
-    elif option == "last3":
+    elif option == "last3" or option == "lasty":
         startDate = start
-        for _ in range(3):
+        numberOfPeriods = 3 if option == "last3" else 12 
+        for _ in range(numberOfPeriods):
             dict["{1}-{0}".format(startDate.year,startDate.month)] = 0
             if startDate.month >= 12:
                 startDate = datetime.date(startDate.year + 1, 1, startDate.day)
@@ -60,10 +61,17 @@ def createPeriodData(data, start, end, option):
             if (element['date_created']).date() >= start and (element['date_created']).date() <= end:
                 dict["{1}-{0}".format(element["date_created"].date().year, element["date_created"].date().month)] += float(element['value'])
 
-    elif option == "lasty":
-        pass
     elif option == "all":
-        pass
+        startDate = start
+        numberOfPeriods = datetime.date.today().year - startDate.year + 1
+
+        for _ in range(numberOfPeriods):
+            dict["{}".format(startDate.year)] = 0
+            startDate = datetime.date(startDate.year + 1, 1, startDate.day)
+
+        for element in data:
+            if (element['date_created']).date() >= start and (element['date_created']).date() <= end:
+                dict["{}".format(element["date_created"].date().year)] += float(element['value'])
 
     return dict
     

@@ -6,20 +6,7 @@
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-6">
-            <div class="card card-body mt-2 py-0">
-                <div class="row">
-                    <div class="col-sm-6 mt-2 mb-0 d-flex align-items-center justify-content-center">
-                        <h2 class="fw-bold">Contact us</h2>
-                    </div>
-                    <div class="col-sm-6 mt-2 mb-0">
-                        <p>
-                            <span class="fw-bold">Phone:</span> +48 565 768 879<br>
-
-                            Our team is always available at Mo-Sat 8:00-18:00.<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {% if source == "contactSupport" %}
             <div class="card card-body px-4 mt-3">
                 <div class="d-flex justify-content-center">
                     <form method="POST" action="">
@@ -30,7 +17,7 @@
                         <input type="hidden" name="email" value="{{ request.user.email }}">
                         {% else %}
                         <div class="input-group mb-2">
-                            <span class="input-group-text bg-warning p-0 text-dark fs-3">&#9993;</span>
+                            <span class="input-group-text bg-secondary p-0 text-dark fs-3">&#9993;</span>
                             <input type="email" name="email" placeholder="Email..." class="form-control" required>
                         </div>
                         {% endif %}
@@ -71,6 +58,29 @@
                     </form>
                 </div>
             </div>
+            {% else %}
+            <div class="card card-body mt-5 py-0">
+                <div class="row">
+                    <div class="col-sm-12 mt-2 mb-0 d-flex align-items-center justify-content-center">
+                        <p class="display-1 fw-bold">Contact us</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 mt-2 mb-0 d-flex align-items-center justify-content-center">
+                        <p class="display-3">+48 565 768 879</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5>
+                            All matters - one number<br><br>
+                            Your comfort is most important to us so our team is always available from Monday to Friday at 8:00 - 19:00<br><br>
+                            Our staff is perfectly preapared for taking care of your problems and for answering even the hardest questions<br><br>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </main>

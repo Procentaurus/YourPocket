@@ -6,7 +6,7 @@
 	<div class="row mt-3">
 		<div class="col-md-4">
 			<div class="card card-body ms-3">
-				<a class="btn btn-secondary fw-bold" href="{% url 'home' %}"> &#8592; Back to Profile</a>
+				<a class="btn btn-secondary fw-bold" href="{% url 'profile' request.user.id %}"> &#8592; Back to Profile</a>
 				<hr>
 				<h3 style="text-align: center">Account Settings</h3>
 				<hr>
@@ -57,7 +57,7 @@
 				</div>
 				<div class="col-sm-3">
 					<div class="p-1 bd-highlight d-grid">
-						<a class="btn btn-success mx-2 p-2 fw-bold" href="#">Buy Premium Account</a>
+						<a class="btn btn-info mx-2 p-2 fw-bold" href="{% url 'contact' %}">Mail our support</a>
 					</div>
 				</div>
 				<div class="col-sm-3">

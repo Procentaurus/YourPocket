@@ -2,7 +2,11 @@
 
 {% block content %}
 
-<main>
+{% if page == 'login' %}
+<main style="margin-bottom: 179px;">
+{% else %}
+<main style="margin-bottom: 88px;">
+{% endif %}
     <div class="d-flex justify-content-center">
         <div class="card mt-5 rounded border-4" style="width:400px; background-color:rgb(50, 120, 199)">
             <div class="card-body">
@@ -100,5 +104,6 @@
         </div>
     </div>   
 </main>
+
 
 {% endblock content %}

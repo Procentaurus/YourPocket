@@ -10,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import datetime
 from dateutil.relativedelta import relativedelta
 from calendar import monthrange
+import pytz
 
 
 from main.decorators import *
@@ -37,8 +38,18 @@ def profileDataVisualisation(request):
     if period is not None:
         start, end, option = None, datetime.date.today(), None
         if period == "all":
-            start = datetime.date.min
+            start = datetime.datetime.max.replace(tzinfo=pytz.UTC)
+            
+            for expense in all_expenses:
+                if (expense.date_created).replace(tzinfo=pytz.UTC) < start:
+                    start = expense.date_created
+
+            for income in all_incomes:
+                if (income.date_created).replace(tzinfo=pytz.UTC) < start:
+                    start = income.date_created
+            start = start.date()
             option = "all"
+
         elif period == "last":
             end = end - relativedelta(months=1)
             lastDay = monthrange(end.year, end.month)
@@ -46,16 +57,20 @@ def profileDataVisualisation(request):
             lastDay = monthrange(end.year, end.month)
             start = datetime.date(end.year, end.month, 1)
             option = "last"
+
         elif period == "last3":
             start = end - relativedelta(months=2)
             start = datetime.date(start.year, start.month, 1)
             option = "last3"
+
         elif period == "lasty":
-            start = datetime.date(end.year - 1, end.month, end.day)
+            start = datetime.date(end.year - 1, end.month + 1, end.day)
             option = "lasty"
+
         elif period == "this":
             start = datetime.date(end.year, end.month, 1)
             option = "this"
+
         else:
             start = datetime.date.min
             option = ""
@@ -297,10 +312,11 @@ def error500_view(request):
     }
     return render(request, 'main/error.html', context, status=500)
 
-def contact(request):
+@login_required(login_url='login')
+def contactSupport(request):
     if request.method =='POST':
         messageBody = request.POST.get('message_body')
-        chosenCase = request.POST.get('chosenCase')
+        chosenCase = request.POST.get('chosenCase') if request.POST.get('chosenCase') is not None else "Others"
         email = request.POST.get('email')
         emailMessage = "Email from: "+ email +"\n\n"+ messageBody
         try:
@@ -318,4 +334,13 @@ def contact(request):
 
         return redirect('home')
         
-    return render(request, 'main/contact.html')
+    context = {
+        "source": "contactSupport"
+    }
+    return render(request, 'main/contact.html', context)
+
+def contactInfo(request):
+    context = {
+        "source": "contactInfo"
+    }
+    return render(request, 'main/contact.html', context)

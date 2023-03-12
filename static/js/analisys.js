@@ -60,7 +60,7 @@ function drawPieChart(objectID, title, data){
       width: 500,
       margin: {
         b: 0,
-        r: 30,
+        r: 40,
         l: 40,
         t: 70
       }
@@ -115,26 +115,21 @@ function setYearsInFilter(){
     document.getElementById('currentYear-3').innerText = new Date().getFullYear()-3;
     document.getElementById('currentYear-4').innerText = new Date().getFullYear()-4;
 }
+function uncheckRadios(){
+    for(let i = 1; i <= 5; i++){
+        document.getElementById(`btnradio${i}`).removeAttribute("checked");
+    }
+}
 
 function addListenersForFilterRequest(){
-    document.getElementById('radio').addEventListener('click', function (e){
-        e.preventDefault();
-        getData();
-    })
-    document.getElementById('radio2').addEventListener('click', function (e){
-      e.preventDefault();
-      getData("last");
-    })
-    document.getElementById('radio3').addEventListener('click', function (e){
-      e.preventDefault();
-      getData("last3");
-    })
-    document.getElementById('radio4').addEventListener('click', function (e){
-      e.preventDefault();
-      getData("lasty");
-    })
-    document.getElementById('radio5').addEventListener('click', function (e){
-      e.preventDefault();
-      getData("all");
-    })
+    const array = ["this", "last", "last3", "lasty", "all"]
+
+    for(let i = 1; i <= 5; i++){
+        document.getElementById(`radio${i}`).addEventListener('click', function (e){
+            e.preventDefault();
+            uncheckRadios();
+            document.getElementById(`btnradio${i}`).setAttribute('checked', true);
+            getData(array[i-1]);
+        })
+    }
 }
