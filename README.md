@@ -11,9 +11,17 @@ Project of personal finance manager, which enables controlling amount os spended
 # How it looks like
 
 ![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/1.png)
+
+
 ![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/2.png)
+
+
 ![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/3.png)
+
+
 ![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/4.png)
+
+
 ![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/5.png)
   
   
