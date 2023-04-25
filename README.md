@@ -8,4 +8,12 @@ Project of personal finance manager, which enables controlling amount os spended
 # folder static contains:
   - templates -> set of all graphic, css and js used on website
   
+# How it looks like
+
+![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/1.png)
+![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/2.png)
+![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/3.png)
+![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/4.png)
+![alt text](https://github.com/Procentaurus/YourPocket/blob/master/Photos/5.png)
+  
   
